@@ -46,7 +46,3 @@ export default function MyComponent() {
   - bug fixes: fix: commit message
 
 Note: Follow this link to learn more: [Link](https://www.conventionalcommits.org/en/v1.0.0/)
-
-## Design
-
-[figma](https://www.figma.com/file/33qai5TmxoTnJBA7GeY7JW/OTT-Dark-Theme-Website-UI-Design-Template-for-Media-Streaming%2C-Movies-and-TV-(-FREE-Editable-)-(Community)?type=design&node-id=34%3A3&mode=design&t=OtEmyY65Ng7D8hBh-1)
