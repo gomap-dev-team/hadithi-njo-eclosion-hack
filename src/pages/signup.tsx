@@ -20,6 +20,32 @@ const Login = () => {
     setUserAuthData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // useLayoutEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const user = localStorage.getItem(HADITHI_NJO_USER);
+  //     setNeedToSignIn(!!user);
+  //   }
+  // }, []);
+
+  const onSignup = async () => {
+    try {
+      setIsLoading(true);
+      const user = await supabase.auth.signUp({
+        email: userAuthData.email,
+        password: userAuthData.password,
+      });
+
+      if (user.data) {
+        window.localStorage.setItem(HADITHI_NJO_USER, JSON.stringify(user.data));
+        router.replace("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const onSignin = async () => {
     try {
       setIsLoading(true);
@@ -40,8 +66,7 @@ const Login = () => {
           }),
         });
         console.log({ data });
-        window.localStorage.setItem(HADITHI_NJO_USER, JSON.stringify(data.user));
-        router.push("/");
+        router.push("/login");
       }
     } catch (err) {
       console.log(err);
@@ -59,7 +84,7 @@ const Login = () => {
         <div className="flex flex-col gap-3 bg-white/50 backdrop-blur-lg lg:-ml-20 absolute -translate-y-1/2 top-1/2 w-full p-10 rounded-lg">
           <Input onChange={onAuthInputChange} placeholder="Email" required type="email" name="email" className="" />
           <Input type="password" onChange={onAuthInputChange} required placeholder="Mot de passe" name="password" />
-          <Button onClick={onSignin}>{isLoading ? "En cours" : "Se Connecter"}</Button>
+          <Button onClick={onSignup}>{isLoading ? "En cours" : "Creer un compte"}</Button>
         </div>
       </div>
     </div>
