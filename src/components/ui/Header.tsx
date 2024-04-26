@@ -56,7 +56,11 @@ export default function Header({
       </div>
       <div className="text-accent-foreground flex items-center gap-2 bg-primary-foreground border-primary rounded-md p-2 md:hidden">
         <MessageSwitch />
-        {user && <UserIcon />}
+        {user && (
+          <Link href="/profile">
+            <UserIcon />
+          </Link>
+        )}
       </div>
     </div>
   );

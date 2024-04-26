@@ -9,7 +9,15 @@ import { getUserVideos, retreiveVideoByVideoUrl } from "@/lib/supabase";
 
 export default function View({ user, video, usersVideo }: { user: User; video: typeof card; usersVideo: Array<typeof card> }) {
   return (
-    <Page user={user}>
+    <Page
+      user={user}
+      context={`
+      Title: ${video.videoTitle}
+      Description: ${video.videoDescription}
+      
+      ${video.videoScript}
+    `}
+    >
       <div className="min-w-[70%] flex flex-col gap-3 mt-24">
         <Video className="w-full" src={SUPABASE_URL + video.videoUrl} />
         <div className="flex flex-col bg-foreground/20 p-4 rounded-md">
