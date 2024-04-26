@@ -3,8 +3,9 @@ import Header from "../ui/Header";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { Bot, SendIcon } from "lucide-react";
+import { User } from "@supabase/supabase-js";
 
-export default function Page({ children, props }: { children: ReactNode; props?: ComponentProps<"div"> }) {
+export default function Page({ children, props, user }: { children: ReactNode; props?: ComponentProps<"div">; user: User }) {
   const [isChatVisible, setIsChatVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Page({ children, props }: { children: ReactNode; props?:
   return (
     <div className={`flex overflow-hidden ${props?.className}`} {...props}>
       <div className="xl:max-w-[70%] max-lg:w-full w-[70%] lg:max-w-5xl pb-8 pl-5 pr-5">
-        <Header isChatOpened={isChatVisible} onChatIconClicked={() => setIsChatVisible(!isChatVisible)} />
+        <Header isChatOpened={isChatVisible} user={user} onChatIconClicked={() => setIsChatVisible(!isChatVisible)} />
         {children}
       </div>
       <div

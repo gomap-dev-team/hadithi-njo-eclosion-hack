@@ -1,12 +1,10 @@
-import { MessageCircle, Plus } from "lucide-react";
-import Wrapper from "../layouts/Wrapper";
-import BellIcon from "./icons/BellIcon";
-import MenuIcon from "./icons/MenuIcon";
+import { MessageCircle, Plus, UserIcon } from "lucide-react";
 import SearchIcon from "./icons/SearchIcon";
 import { Menubar, MenubarMenu, MenubarTrigger } from "./menubar";
 import { useRouter } from "next/router";
+import { User } from "@supabase/supabase-js";
 
-export default function Header({ onChatIconClicked, isChatOpened }: { onChatIconClicked: () => void; isChatOpened: boolean }) {
+export default function Header({ onChatIconClicked, isChatOpened, user }: { onChatIconClicked: () => void; isChatOpened: boolean; user: User }) {
   const router = useRouter();
   const MessageSwitch = () => {
     if (isChatOpened) return <Plus onClick={onChatIconClicked} role="button" className="cursor-pointer rotate-45 max-lg:block hidden" />;
@@ -35,11 +33,16 @@ export default function Header({ onChatIconClicked, isChatOpened }: { onChatIcon
       <div className="gap-3 items-center text-accent-foreground hidden md:flex">
         <MessageSwitch />
         <SearchIcon className="cursor-pointer" />
-        <BellIcon className="cursor-pointer" />
+        {user && (
+          <p className="bg-white text-black py-2 w-fit px-3 flex gap-2 items-center cursor-pointer justify-center rounded-md text-xs">
+            <UserIcon className="w-5 h-5" />
+            {user.email?.split("@")[0]}
+          </p>
+        )}
       </div>
       <div className="text-accent-foreground flex items-center gap-2 bg-primary-foreground border-primary rounded-md p-2 md:hidden">
         <MessageSwitch />
-        <MenuIcon />
+        {user && <UserIcon />}
       </div>
     </div>
   );
