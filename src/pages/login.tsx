@@ -7,7 +7,7 @@ import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
 
 const HADITHI_NJO_USER = "hadithi-njo-user";
 
-const Login = () => {
+function Login() {
   const [needToSignIn, setNeedToSignIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [userAuthData, setUserAuthData] = useState({
@@ -64,6 +64,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;
