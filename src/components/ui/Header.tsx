@@ -3,6 +3,7 @@ import SearchIcon from "./icons/SearchIcon";
 import { Menubar, MenubarMenu, MenubarTrigger } from "./menubar";
 import { useRouter } from "next/router";
 import { User } from "@supabase/supabase-js";
+import Link from "next/link";
 
 export default function Header({ onChatIconClicked, isChatOpened, user }: { onChatIconClicked: () => void; isChatOpened: boolean; user: User }) {
   const router = useRouter();
@@ -34,10 +35,10 @@ export default function Header({ onChatIconClicked, isChatOpened, user }: { onCh
         <MessageSwitch />
         <SearchIcon className="cursor-pointer" />
         {user && (
-          <p className="bg-white text-black py-2 w-fit px-3 flex gap-2 items-center cursor-pointer justify-center rounded-md text-xs">
+          <Link href="/profile" className="bg-white text-black py-2 w-fit px-3 flex gap-2 items-center cursor-pointer justify-center rounded-md text-xs">
             <UserIcon className="w-5 h-5" />
             {user.email?.split("@")[0]}
-          </p>
+          </Link>
         )}
       </div>
       <div className="text-accent-foreground flex items-center gap-2 bg-primary-foreground border-primary rounded-md p-2 md:hidden">
