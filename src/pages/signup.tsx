@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const HADITHI_NJO_USER = "hadithi-njo-user";
 
