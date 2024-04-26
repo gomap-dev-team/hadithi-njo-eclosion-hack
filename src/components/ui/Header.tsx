@@ -4,8 +4,19 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "./menubar";
 import { useRouter } from "next/router";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default function Header({ onChatIconClicked, isChatOpened, user }: { onChatIconClicked: () => void; isChatOpened: boolean; user: User }) {
+export default function Header({
+  onChatIconClicked,
+  isChatOpened,
+  user,
+  shouldCenter = false,
+}: {
+  onChatIconClicked: () => void;
+  isChatOpened: boolean;
+  user: User;
+  shouldCenter?: boolean;
+}) {
   const router = useRouter();
   const MessageSwitch = () => {
     if (isChatOpened) return <Plus onClick={onChatIconClicked} role="button" className="cursor-pointer rotate-45 max-lg:block hidden" />;
@@ -13,13 +24,15 @@ export default function Header({ onChatIconClicked, isChatOpened, user }: { onCh
   };
 
   return (
-    <div className="flex justify-between backdrop-blur-md  items-center z-50 fixed xl:w-[70%] w-full top-0 left-0 right-0 py-5 px-5">
-      <h1 onClick={() => router.push("/")} className="font-extrabold text-accent-foreground">
+    <div className={cn("flex justify-between backdrop-blur-md  items-center z-50 fixed xl:w-[70%] w-full top-0 left-0 right-0 py-5 px-5", shouldCenter ? "mx-auto" : "")}>
+      <h1 onClick={() => router.push("/")} className="font-extrabold text-accent-foreground cursor-pointer">
         Hadithi-njo
       </h1>
       <Menubar className="min-w-1/4 hidden md:flex">
         <MenubarMenu>
-          <MenubarTrigger className="w-full inline-flex justify-center">Home</MenubarTrigger>
+          <MenubarTrigger onClick={() => router.push("/")} className="w-full inline-flex cursor-pointer justify-center">
+            Home
+          </MenubarTrigger>
         </MenubarMenu>
         <MenubarMenu>
           <MenubarTrigger className="w-full inline-flex justify-center">Show</MenubarTrigger>
